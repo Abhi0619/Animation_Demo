@@ -29,7 +29,7 @@ class ViewController: UIViewController {
         self.animatedView.animate(.delay(0.0),.duration(1),.scale(1.5),.background(color: UIColor.clear),.completion({
             self.animatedView.animate(.delay(1.0),.duration(1),.scale(0.2),.position(x: self.lblCentre.x - 42, y: 62),.background(color: UIColor.clear),.completion({
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
-                    self.animatedView.isHidden = true
+                    self.animatedView.isHidden = false
                 }
             }))
         }))
