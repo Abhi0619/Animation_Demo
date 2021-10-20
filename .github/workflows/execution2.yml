@@ -55,7 +55,8 @@ jobs:
     - name: Force Xcode
       run: sudo xcode-select -switch /Applications/Xcode.app
     - name: Run tests
-      run: xcodebuild clean test -project "annnimationDemo.xcodeproj" -scheme "annnimationDemo" -destination "platform=iOS Simulator,name=iPhone 11 Pro,OS=latest"
+    run: swift build -v
+#       run: xcodebuild clean test -project "annnimationDemo.xcodeproj" -scheme "annnimationDemo" -destination "platform=iOS Simulator,name=iPhone 11 Pro,OS=latest"
     - name: Build App
       run: swift build -v
 #       run: xcodebuild -project "annnimationDemo.xcodeproj" -scheme "annnimationDemo" -destination "generic/platform=iOS" -configuration Release build CODE_SIGNING_ALLOWED=NO
