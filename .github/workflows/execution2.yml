@@ -19,24 +19,43 @@
 #       run: swift test -v
 
 
-name: execution2
+# name: execution2
 
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+# on:
+#   push:
+#     branches: [ main ]
+#   pull_request:
+#     branches: [ main ]
+
+# jobs:
+#   build:
+
+#     runs-on: macos-latest
+
+#     steps:
+#     - uses: actions/checkout@v2
+#     - name: Force Xcode
+#       run: sudo xcode-select -switch /Applications/Xcode.app
+#     - name: Build
+#       run: swift build -v
+#     - name: Run tests
+#       run: swift test -v
+
+name: Swift
+
+on: [push]
 
 jobs:
   build:
 
-    runs-on: macos-latest
+    runs-on: macOS-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v1
     - name: Force Xcode
       run: sudo xcode-select -switch /Applications/Xcode.app
-    - name: Build
-      run: swift build -v
     - name: Run tests
-      run: swift test -v
+      run: xcodebuild clean test -project "annnimationDemo.xcodeproj" -scheme "annnimationDemo" -destination "platform=iOS Simulator,name=iPhone 11 Pro,OS=latest"
+    - name: Build App
+      run: xcodebuild -project "annnimationDemo.xcodeproj" -scheme "annnimationDemo" -destination "generic/platform=iOS" -configuration Release build CODE_SIGNING_ALLOWED=NO
+
