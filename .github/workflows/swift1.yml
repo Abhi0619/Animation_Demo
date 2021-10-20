@@ -1,0 +1,28 @@
+name: Swift1
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: macOS-latest
+    strategy:
+      matrix:
+        destination: ['platform=iOS Simulator,OS=15.0,name=iPhone 11 Pro']
+
+    steps:
+    - uses: actions/checkout@master
+    - name: Build
+      run: swift build -v
+
+  test:
+      name: Test
+      runs-on: macOS-latest
+      strategy:
+          matrix:
+            destination: ['platform=iOS Simulator,OS=15.0,name=iPhone 11 Pro']
+      steps:
+        - name: Checkout
+          uses: actions/checkout@master
+        - name: Run tests
+          run: swift test -v
