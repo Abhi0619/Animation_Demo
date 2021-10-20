@@ -1,28 +1,21 @@
-name: Swift1
+name: Swift
 
-on: [push]
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
   build:
 
-    runs-on: macOS-latest
-    strategy:
-      matrix:
-        destination: ['platform=iOS Simulator,OS=15.0,name=iPhone 11 Pro']
+    runs-on: macos-latest
 
     steps:
-    - uses: actions/checkout@master
+    - uses: actions/checkout@v2
+    - name: Force Xcode 11
+      run: sudo xcode-select -switch /Applications/Xcode_13.0.app
     - name: Build
       run: swift build -v
-
-  test:
-      name: Test
-      runs-on: macOS-latest
-      strategy:
-          matrix:
-            destination: ['platform=iOS Simulator,OS=15.0,name=iPhone 11 Pro']
-      steps:
-        - name: Checkout
-          uses: actions/checkout@master
-        - name: Run tests
-          run: swift test -v
+    - name: Run tests
+      run: swift test -v
